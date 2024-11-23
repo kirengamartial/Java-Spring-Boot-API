@@ -38,9 +38,13 @@ public ResponseEntity<List<PokemonDto>> getPokemon() {
 }
 
     @GetMapping("pokemon/{id}")
-    public Pokemon pokemonDetail(@PathVariable int id) {
-        return new Pokemon(id, "Squirtle", "Water");
+    public ResponseEntity<PokemonDto> pokemonDetail(@PathVariable int id) {
+        return  ResponseEntity.ok(pokemonService.getPokemonById(id));
     }
+//    @GetMapping("pokemon/{id}")
+//    public Pokemon pokemonDetail(@PathVariable int id) {
+//        return new Pokemon(id, "Squirtle", "Water");
+//    }
 
 //    @PostMapping("pokemon/create")
 //    @ResponseStatus(HttpStatus.CREATED)
@@ -57,16 +61,28 @@ public ResponseEntity<List<PokemonDto>> getPokemon() {
     }
 
     @PutMapping("pokemon/{id}/update")
-    public ResponseEntity<Pokemon> updatePokemon(@PathVariable int id, @RequestBody Pokemon pokemon) {
-        System.out.println(pokemon.getName());
-        System.out.println(pokemon.getType());
-
-        return ResponseEntity.ok(pokemon);
+    public ResponseEntity<PokemonDto> updatePokemon(@RequestBody PokemonDto pokemonDto, @PathVariable int id) {
+        PokemonDto response = pokemonService.updatePokemon(pokemonDto, id);
+        return new ResponseEntity<PokemonDto>(response, HttpStatus.OK);
     }
+
+//    @PutMapping("pokemon/{id}/update")
+//    public ResponseEntity<Pokemon> updatePokemon(@PathVariable int id, @RequestBody Pokemon pokemon) {
+//        System.out.println(pokemon.getName());
+//        System.out.println(pokemon.getType());
+//
+//        return ResponseEntity.ok(pokemon);
+//    }
 
     @DeleteMapping("pokemon/{id}/delete")
     public ResponseEntity<String> deletePokemon(@PathVariable int id) {
-        System.out.println(id);
-        return ResponseEntity.ok("Pokemon Deleted successfully");
+        pokemonService.deletePokemon(id);
+        return new ResponseEntity<>("Pokemon deleted", HttpStatus.OK);
     }
+
+//    @DeleteMapping("pokemon/{id}/delete")
+//    public ResponseEntity<String> deletePokemon(@PathVariable int id) {
+//        System.out.println(id);
+//        return ResponseEntity.ok("Pokemon Deleted successfully");
+//    }
 }
