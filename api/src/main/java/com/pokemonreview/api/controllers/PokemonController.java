@@ -80,6 +80,7 @@ public ResponseEntity<List<PokemonDto>> getPokemon() {
         return new ResponseEntity<>("Pokemon deleted", HttpStatus.OK);
     }
 
+
 //    @DeleteMapping("pokemon/{id}/delete")
 //    public ResponseEntity<String> deletePokemon(@PathVariable int id) {
 //        System.out.println(id);
