@@ -81,6 +81,7 @@ public ResponseEntity<List<PokemonDto>> getPokemon() {
     }
 
 
+
 //    @DeleteMapping("pokemon/{id}/delete")
 //    public ResponseEntity<String> deletePokemon(@PathVariable int id) {
 //        System.out.println(id);
